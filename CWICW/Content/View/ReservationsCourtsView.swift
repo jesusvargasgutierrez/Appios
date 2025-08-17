@@ -66,11 +66,13 @@ class ReservationsCourtsView: UIViewController, UIPickerViewDelegate, UIPickerVi
         //Comienza control de fecha
         datepicker.datePickerMode = .date
         datepicker.contentHorizontalAlignment = .fill
+        datepicker.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(datepicker)
         
         //Comienza control de horario
         pickerschedule.datePickerMode = .time
         pickerschedule.contentHorizontalAlignment = .fill
+        pickerschedule.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(pickerschedule)
         
         //Comienza botton de enviar
@@ -100,7 +102,9 @@ class ReservationsCourtsView: UIViewController, UIPickerViewDelegate, UIPickerVi
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            datepicker.widthAnchor.constraint(equalTo: stack.widthAnchor),
+            pickerschedule.widthAnchor.constraint(equalTo: stack.widthAnchor)
         ])
     }
 
@@ -146,6 +150,22 @@ class ReservationsCourtsView: UIViewController, UIPickerViewDelegate, UIPickerVi
             let idSeleccionado = courts[row].id
             print("ID seleccionado: \(idSeleccionado)")
         }
+    }
+    
+    @objc func handleSend() {
+        // Obtener cancha seleccionada
+        let cancha = selectcourts.text ?? ""
+
+        // Obtener fecha seleccionada
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let fecha = formatter.string(from: datepicker.date)
+
+        // Obtener hora seleccionada
+        formatter.dateFormat = "HH:mm"
+        let hora = formatter.string(from: pickerschedule.date)
+
+        print("Cancha: \(cancha), Fecha: \(fecha), Hora: \(hora)")
     }
 }
 
