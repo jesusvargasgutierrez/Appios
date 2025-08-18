@@ -12,7 +12,7 @@ class ReservationsCourtsView: UIViewController, UIPickerViewDelegate, UIPickerVi
     let labeldate = UILabel()
     let labelschedule = UILabel()
     let pickerschedule = UIDatePicker()
-    var courts: [Subjects] = []
+    var courts: [Courts] = []
     var campoActivo: UITextField?
 
     override func viewDidLoad() {
@@ -22,7 +22,7 @@ class ReservationsCourtsView: UIViewController, UIPickerViewDelegate, UIPickerVi
         super.viewDidLoad()
            view.backgroundColor = .white
            //configurarUI()
-        WebServiceApi.shared.gettypesubject(){result in
+        WebServiceApi.shared.getcourts(){result in
             DispatchQueue.main.async {
                 switch result{
                     case .success(let response):
@@ -79,6 +79,7 @@ class ReservationsCourtsView: UIViewController, UIPickerViewDelegate, UIPickerVi
         btnsend.setTitle("Reservar", for: .normal)
         btnsend.backgroundColor = .blue
         btnsend.layer.cornerRadius = 10
+        btnsend.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         view.addSubview(btnsend)
         
         let stack = UIStackView(arrangedSubviews:[

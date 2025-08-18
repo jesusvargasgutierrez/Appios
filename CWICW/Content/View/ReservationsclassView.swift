@@ -21,8 +21,8 @@ class ReservationsclassView: UIViewController, UIPickerViewDelegate, UIPickerVie
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        super.viewDidLoad()
-           view.backgroundColor = .white
+        //super.viewDidLoad()
+           //view.backgroundColor = .white
            //configurarUI()
         WebServiceApi.shared.gettypesubject(){result in
             DispatchQueue.main.async {
